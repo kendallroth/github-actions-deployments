@@ -1,0 +1,52 @@
+name: Production Deploy (Release)
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install
+      - run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install
+      - run: npm run test
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - run: echo "Bundling code..."
+      - run: echo "Uploading artifact..."
+      - run: echo "Just kidding, that's not actually implemented yet..."
+
+  release-staging:
+    runs-on: ubuntu-latest
+    needs: [build]
+    environment:
+      name: staging
+    steps:
+      - run: echo "Downloading artifact..."
+      - run: echo "Deploying artifact..."
+      - run: echo "Just kidding, that's also not actually implemented yet..."
+
+  release-production:
+    runs-on: ubuntu-latest
+    needs: [release-staging]
+    environment:
+      name: production
+    steps:
+      - run: echo "Downloading artifact..."
+      - run: echo "Deploying artifact..."
+      - run: echo "Just kidding, that's also not actually implemented yet..."

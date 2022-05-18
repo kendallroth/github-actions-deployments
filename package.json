@@ -1,0 +1,22 @@
+{
+  "name": "github-actions-deployments",
+  "version": "0.1.0",
+  "description": "Use GitHub Actions for deployments",
+  "author": {
+    "email": "kendall@kendallroth.ca",
+    "name": "Kendall Roth",
+    "url": "https://www.kendallroth.ca"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kendallroth/github-actions-deployments"
+  },
+  "scripts": {
+    "lint": "eslint \"./src/**.js\"",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "jest": "^28.1.0"
+  }
+}

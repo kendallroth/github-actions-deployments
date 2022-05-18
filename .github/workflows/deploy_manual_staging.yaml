@@ -1,0 +1,49 @@
+name: Manual Deploy (staging)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Release ref (branch/tag)"
+        default: "main"
+        required: false
+        type: string
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.ref }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install
+      - run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.ref }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install
+      - run: npm run test
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - run: echo "Bundling code..."
+      - run: echo "Uploading artifact..."
+      - run: echo "Just kidding, that's not actually implemented yet..."
+
+  release-staging:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - run: echo "Downloading artifact..."
+      - run: echo "Deploying artifact..."
+      - run: echo "Just kidding, that's also not actually implemented yet..."
